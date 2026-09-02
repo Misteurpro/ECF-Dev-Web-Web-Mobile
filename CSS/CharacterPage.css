@@ -1,0 +1,13 @@
+#divtestimg{
+    background-color: var(--color_Secondary);
+    border: var(--color_Border_Grey) solid 3px;
+    border-radius: 5px;
+    flex : 1 1 auto;
+    margin-left: 5%;   
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;    
+}

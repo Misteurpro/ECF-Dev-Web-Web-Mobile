@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg id="svg2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39 39" xmlns:bx="https://boxy-svg.com">
+  <desc>Source: openclipart.org/detail/209545</desc>
+  <defs>
+    <bx:export>
+      <bx:file format="svg" href="#object-0" path="Sans titre.svg"/>
+      <bx:file format="svg" href="#object-1" path="Sans titre 2.svg"/>
+      <bx:file format="svg" href="#object-2" path="Sans titre 3.svg"/>
+    </bx:export>
+  </defs>
+  <path d="M 3.25 39 C 3.25 39 0 39 0 35.75 C 0 32.5 3.25 22.75 19.5 22.75 C 24.942 22.75 28.927 23.844 31.819 25.42 C 32.197 25.626 28.706 27.328 28.706 27.328 L 27.697 30.14 L 27.736 33.394 L 30.77 36.094 L 34.274 36.541 L 36.607 34.891 C 36.607 34.891 38.266 32.413 38.338 32.601 C 38.464 32.932 39 35.187 39 35.75 C 39 39 35.75 39 35.75 39 L 3.25 39 Z M 19.5 19.5 C 22.086 19.5 24.566 18.473 26.394 16.645 C 28.223 14.816 29.25 12.336 29.25 9.75 C 29.25 7.165 28.223 4.685 26.394 2.856 C 24.566 1.028 22.086 0 19.5 0 C 16.914 0 14.434 1.028 12.606 2.856 C 10.777 4.685 9.75 7.165 9.75 9.75 C 9.75 12.336 10.777 14.816 12.606 16.645 C 14.434 18.473 16.914 19.5 19.5 19.5 Z" style="stroke-width: 1; fill: rgb(255, 255, 255);" id="object-0"/>
+  <ellipse style="paint-order: fill; fill: rgba(0, 0, 0, 0); stroke: rgb(255, 255, 255);" cx="32.88" cy="31.126" rx="5.618" ry="5.618" id="object-1"/>
+  <path style="fill: rgba(255, 255, 255, 0); stroke: rgb(255, 255, 255);" d="M 30.506 30.405 L 32.213 32.83 L 36.051 30.028" id="object-2"/>
+</svg>

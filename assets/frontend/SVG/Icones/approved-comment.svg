@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg id="svg2" viewBox="0 0 39 39" xmlns="http://www.w3.org/2000/svg">
+  <desc>Source: openclipart.org/detail/209545</desc>
+  <title>Demo - Cherry</title>
+  <path d="M 19.501 37.5 C 21.941 37.5 24.268 37.014 26.39 36.134 C 26.6 36.047 24.525 31.824 24.525 31.824 L 26.45 28.3 L 29.376 26.278 L 33.436 26.771 C 33.436 26.771 35.062 28.627 35.308 28.194 C 36.795 25.575 37.5 22.727 37.5 19.501 C 37.5 9.558 29.44 1.5 19.501 1.5 C 9.558 1.5 1.5 9.558 1.5 19.501 C 1.5 22.472 2.222 25.28 3.499 27.754 L 1.5 37.5 L 11.246 35.502 C 13.72 36.778 16.526 37.5 19.501 37.5 Z" style="stroke: rgb(255, 255, 255); fill: rgb(255, 255, 255);" stroke-linecap="round" stroke-linejoin="round" alignment-baseline="initial"/>
+  <path style="fill: none; stroke-linecap: round; stroke: rgb(0, 0, 0);" d="M 11.784 13.77 L 28.169 13.77"/>
+  <path style="fill: none; stroke-linecap: round; stroke-width: 1; stroke: rgb(0, 0, 0);" d="M 11.753 18.58 L 28.14 18.58"/>
+  <path style="fill: none; stroke-linecap: round; stroke-width: 1; stroke: rgb(0, 0, 0);" d="M 11.814 23.305 L 28.199 23.305"/>
+  <ellipse style="paint-order: fill; fill: rgba(0, 0, 0, 0); stroke-width: 1; stroke: rgb(255, 255, 255);" cx="30.898" cy="32.176" rx="5.618" ry="5.618" id="ellipse-1"/>
+  <path style="fill: rgba(255, 255, 255, 0); stroke-width: 1; stroke: rgb(255, 255, 255);" d="M 28.524 31.455 L 30.231 33.88 L 34.069 31.078" id="path-1"/>
+</svg>

@@ -1,0 +1,173 @@
+:root{
+  --color_Primary : rgb(16 31 93);
+  --color_Secondary : rgb(51 77 178);
+  --color_Secondary_Darker : rgb(43, 66, 156);
+  --color_Border_Grey : rgb(134 134 134);
+  --color_Text_Blue : rgb(170 217 255);
+}
+canvas{
+	width: 145%;
+}
+.character_sheet #images{
+  align-items: center;
+  justify-content: end;
+}
+
+#char_max_lengh{
+	display: none;
+}
+
+img{
+  image-rendering: pixelated;
+}
+.imgcolor{
+  width: 100%;
+  position: absolute;
+  top: 55px;
+}
+
+.isActive{
+  border: solid green 2px;
+}
+
+aside div{
+    width: 400px;
+    padding-left: 20px;
+}
+
+aside{
+    overflow: auto
+}
+
+.slidecontainer {
+  width: 80%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #c2c2c2;
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border-radius: 25px;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 25px;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+#main_screen{
+  position: relative;
+  justify-content: flex-start;
+}
+
+.character_sheet{
+  margin-right: 20px;
+  margin-left: 20px;
+  position: relative;
+}
+
+div.blurry{
+  backdrop-filter: blur(10px);
+  position: absolute;
+  width: 100%;
+  height: 56%;
+  display: flex;
+  justify-content: center;
+}
+
+div.tab div.screen{
+  width: 500px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color_Secondary_Darker);
+}
+
+div.tab{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+button{
+    padding: 2px;
+    background-color: var(--color_Border_Grey);
+}
+
+
+.user_input{
+  background-color: var(--color_Secondary_Darker);
+  color: white;
+  padding: 2px;
+  border-style: inset;
+  font-size: larger;
+  border-width: 2px;
+}
+button.user_input{
+  border-style:outset;
+}
+
+button.user_input:active{
+  border-style: inset;
+}
+
+@media(max-width: 1100px) {
+  
+  div.tab{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+aside{
+  border-top: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.character_sheet{
+  position: absolute;
+  bottom: -340px;
+  right: 20px;
+}
+
+.character_creator_asset{
+  flex-direction: column-reverse;
+}
+
+#main_screen{
+  margin: 0px;
+  border-bottom: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  justify-content: center;
+}
+
+}

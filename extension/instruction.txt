@@ -1,0 +1,13 @@
+Gérer Composer (il gère les extensions)
+
+Mettre à jour les extension
+- composer update
+
+Mettre à jour Composer
+- composer self-update
+
+Installer une extension
+- composer require EXTENSION
+
+Supprimer une extension
+- composer remove EXTENSION
