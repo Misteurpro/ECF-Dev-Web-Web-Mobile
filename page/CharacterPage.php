@@ -127,7 +127,7 @@
 						</div>
 					</div>
 					<div class="comments_tab">
-						<div class="comments_bar"><h2>Avis de la communauté :</h2><button onclick="show_comment_bar()">Envoyer un commentaire</button></div>
+						<div class="comments_bar"><h2>Avis de la communauté :</h2><button onclick="show_comment_bar(<?php echo is_connected() ?>)">Envoyer un commentaire</button></div>
 						<div class="user_comment" id="user_comment_div" style="display:none">
 							<form action="" method="POST">
 								<div id="textarea_comment">

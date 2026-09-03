@@ -16,9 +16,14 @@ function loadDoc(character_id) {
 	xhttp.send();
 }
 
-function show_comment_bar(){
-	let user_comment_div = document.getElementById("user_comment_div");
-	user_comment_div.style.display = 'block';
+function show_comment_bar(islogin){
+	if(islogin){
+		let user_comment_div = document.getElementById("user_comment_div");
+		user_comment_div.style.display = 'block';
+	}
+	else{
+		window.location = "/login"
+	}
 }
 
 function deleteCharacter(){
