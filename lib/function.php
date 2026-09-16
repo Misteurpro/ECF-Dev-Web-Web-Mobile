@@ -62,6 +62,8 @@ function debug_on() : void {
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
+	ini_set('log_error', 1);
+	ini_set('error_log', 'errors.log');
 }
 /**
  * This will disable debugging on the website
@@ -70,7 +72,9 @@ function debug_on() : void {
 function debug_off() : void {
 	ini_set('display_errors', 0);
 	ini_set('display_startup_errors', 0);
-	error_reporting(0);
+	error_reporting(E_ALL);
+	ini_set('log_error', 1);
+	ini_set('error_log', 'errors.log');
 }
 
 function check_password_strong($password){
