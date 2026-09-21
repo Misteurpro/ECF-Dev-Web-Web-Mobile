@@ -3,6 +3,7 @@ console.log("Ces cookies pourraient être utilisés pour accéder à votre compt
 
 function loadDoc(character_id) {
 	var xhttp = new XMLHttpRequest();
+	const csrf_token = get_csrf_token();
 	
 	xhttp.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200) {
@@ -11,7 +12,7 @@ function loadDoc(character_id) {
 	};
 	shared = document.getElementById("tag_"+character_id).checked;
 
-	let url = ("/menu/mon-espace?share_status="+shared+"&character_id="+character_id);
+	let url = ("/menu/mon-espace?share_status="+shared+"&character_id="+character_id+"&csrf_token="+csrf_token);
 	xhttp.open("POST", url, true);
 	xhttp.send();
 }
