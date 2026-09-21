@@ -497,8 +497,8 @@ function render_characters(mixed $characters, mixed $enable_overlay, bool $is_ad
 					?>
 						<span class='overlay'>
 							<span>
-								<a href='/employee/approuver-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>&approve' class='button'>Approuver</a>
-								<a href='/employee/approuver-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>&refuse' class='button color-red'>Refuser</a>
+								<a href='/employee/approuver-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>&csrf_token=<?php echo get_csrf_token() ?>&approve' class='button'>Approuver</a>
+								<a href='/employee/approuver-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>&csrf_token=<?php echo get_csrf_token() ?>&refuse' class='button color-red'>Refuser</a>
 							</span>
 							<span>
 								<a href='/menu/page-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>' class='button color-green'>Ouvrir</a>

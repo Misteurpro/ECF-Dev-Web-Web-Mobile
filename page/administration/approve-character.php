@@ -6,7 +6,7 @@ require("lib/page-library.php");
 
 if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_employee() && !check_if_user_blocked($_SESSION["id_utilisateur"])):
 
-if(!empty($_GET['character'])){
+if(!empty($_GET['character']) && check_csrf_token()){
 	if(is_connected() && isset($_GET['approve'])){
 		approve_character($_GET['character']);
 	}
@@ -17,7 +17,7 @@ if(!empty($_GET['character'])){
 }
 
 if(isset($_GET['submit-refusal'])){
-	if(is_admin() || is_employee()){
+	if(is_admin() && check_csrf_token() || is_employee() && check_csrf_token()){
 
 	$reason = $_POST["reason-textarea"];
 	$character_id = $_POST["character_id"];
