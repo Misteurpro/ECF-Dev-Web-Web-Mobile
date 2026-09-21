@@ -29,7 +29,7 @@ function get_csrf_token(){
 }
 
 function embed_csrf_token(){
-	echo ("<input id='csrf-token' type='hidden' value='".htmlspecialchars(get_csrf_token(), ENT_QUOTES, 'UTF-8')."'");
+	echo ("<input id='csrf-token' type='hidden' value='".htmlspecialchars(get_csrf_token(), ENT_QUOTES, 'UTF-8')."'>");
 }
 
 function check_csrf_token(){
