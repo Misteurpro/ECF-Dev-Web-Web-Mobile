@@ -98,7 +98,6 @@ function manageItem(item, deactivate = false, itself){
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			let state = this.responseText;
-			console.log(itself)
 
 			if(itself.dataset.isactive == "active"){
 				itself.innerText = "Activer";
@@ -113,9 +112,10 @@ function manageItem(item, deactivate = false, itself){
 		}
 	};
 
-	let url = "/employee/liste-article?item="+item+"&enable"
+	const csrf_token = get_csrf_token();
+	let url = "/employee/liste-article?item="+item+"&csrf_token="+csrf_token+"&enable"
 	if(deactivate == true){
-		url = "/employee/liste-article?item="+item+"&disable";
+		url = "/employee/liste-article?item="+item+"&csrf_token="+csrf_token+"&disable";
 	}
 
 	xhttp.open("POST", url, true);

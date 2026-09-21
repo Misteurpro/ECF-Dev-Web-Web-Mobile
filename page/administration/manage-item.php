@@ -6,7 +6,7 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 	$status = "employee";
 
 	$message = "";
-	if(isset($_REQUEST["article_name"])){
+	if(isset($_REQUEST["article_name"]) && check_csrf_token()){
 
 		$tag = "";
 		if(isset($_REQUEST["tag"]))
@@ -16,7 +16,7 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 		header("location: /article-succes");
 	}
 
-	if(isset($_REQUEST["item"]) && $_REQUEST["item"] != null &&!isset($_REQUEST["delete"]) && isset($_REQUEST["confirm"])){
+	if(isset($_REQUEST["item"]) && $_REQUEST["item"] != null &&!isset($_REQUEST["delete"]) && isset($_REQUEST["confirm"]) && check_csrf_token()){
 
 		$disable = true;
 		if(isset($_REQUEST["enable"]))
@@ -25,7 +25,7 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 		echo disable_article($_REQUEST["item"], $disable);
 		exit;
 	}
-	if(isset($_REQUEST["item"]) && $_REQUEST["item"] != null && isset($_REQUEST["delete"]) && isset($_REQUEST["confirm"])){
+	if(isset($_REQUEST["item"]) && $_REQUEST["item"] != null && isset($_REQUEST["delete"]) && isset($_REQUEST["confirm"]) && check_csrf_token()){
 
 		echo delete_article($_REQUEST["item"]);
 		exit;
@@ -58,6 +58,7 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 					}
 					elseif(isset($create_article) && $create_article === true){?>
 						<form class="margin-bottom-7" action="" method="POST">
+							<?php embed_csrf_token() ?>
 							<label for="article_name">Nom de l'article</label>
 							<input class="margin-bottom-1" type="text" name="article_name" id="article_name" required>
 
@@ -71,6 +72,7 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 
 					<?php } 
 					elseif(isset($article_list) && $article_list === true){
+						embed_csrf_token();
 						get_all_article();
 					
 					 } ?>
