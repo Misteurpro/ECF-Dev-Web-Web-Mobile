@@ -1,5 +1,5 @@
 <form class="refuse_pop-up" method="POST" action="/employee/approuver-personnage?submit-refusal">
-	<?php echo embed_csrf_token() ?>
+	<?php embed_csrf_token() ?>
 	<div>
 		<div>
 		<label for="reason-textarea">Raison du refus :</label>

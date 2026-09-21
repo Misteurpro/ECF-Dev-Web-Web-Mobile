@@ -40,11 +40,12 @@ function deleteCharacter(){
 		window.location = this.responseText;
 	}
 	};
+	const csrf_token = get_csrf_token();
 	const urls = window.location;
 	const params = new URLSearchParams(urls.search);
 	const character_id = params.get('character')
 
-	let url = ("/menu/page-personnage?character="+character_id+"&delete");
+	let url = ("/menu/page-personnage?character="+character_id+"&csrf_token="+csrf_token+"&delete");
 	xhttp.open("POST", url, true);
 	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhttp.send("confirm");
@@ -218,13 +219,14 @@ function suspendCharacter(unsuspend = false){
 		
 	}
 	};
+	const csrf_token = get_csrf_token()
 	const urls = window.location;
 	const params = new URLSearchParams(urls.search);
 	const character_id = params.get('character')
 
-	let url = ("/menu/page-personnage?character="+character_id+"&suspend");
+	let url = ("/menu/page-personnage?character="+character_id+"&csrf_token="+csrf_token+"&suspend");
 	if(unsuspend == true){
-		url = "/menu/page-personnage?character="+character_id+"&unsuspend";
+		url = "/menu/page-personnage?character="+character_id+"&csrf_token="+csrf_token+"&unsuspend";
 	}
 
 	xhttp.open("POST", url, true);

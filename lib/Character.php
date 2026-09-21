@@ -579,10 +579,10 @@ function render_all_character(mixed $characters){
 					</div>-->
 					<span class='overlay'>
 						<span>
-							<?php if(check_if_character_blocked($character["id_personnage"]) !== 2 ){ ?><a href='/menu/page-personnage?character=<?php echo $character["id_personnage"] ?>&suspend' class='button'>Suspendre</a><?php }else{ ?>
-							<a href='/menu/page-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8'); ?>&unsuspend' class='button'>Reactivation</a>
+							<?php if(check_if_character_blocked($character["id_personnage"]) !== 2 ){ ?><a href='/menu/page-personnage?character=<?php echo $character["id_personnage"] ?>&csrf_token=<?php echo get_csrf_token() ?>&suspend' class='button'>Suspendre</a><?php }else{ ?>
+							<a href='/menu/page-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8'); ?>&csrf_token=<?php echo get_csrf_token() ?>&unsuspend' class='button'>Reactivation</a>
 							<?php } ?>
-							<a href='/menu/page-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>&delete' class='button color-red'>Supprimer</a>
+							<a href='/menu/page-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>&csrf_token=<?php echo get_csrf_token() ?>&delete' class='button color-red'>Supprimer</a>
 						</span>
 						<span>
 							<a href='/menu/page-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>' class='button color-green'>Ouvrir</a>
