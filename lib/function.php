@@ -20,6 +20,27 @@ function is_connected(){
 	return false;
 }
 
+function get_csrf_token(){
+	if(empty($_SESSION['csrf_token'])){
+		$_SESSION['csrf_token'] = bin2hex(random_bytes(64));
+	}
+
+	return $_SESSION['csrf_token'];
+}
+
+function embed_csrf_token(){
+	echo ("<input id='csrf-token' type='hidden' value='".htmlspecialchars(get_csrf_token(), ENT_QUOTES, 'UTF-8')."'");
+}
+
+function check_csrf_token(){
+	if(empty($_REQUEST["csrf_token"]) || empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_REQUEST["csrf_token"])){
+		return(false);
+	}
+	else{
+		return(true);
+	}
+}
+
 /**
  * This will return true or false if you are an employee or not
  * @return bool

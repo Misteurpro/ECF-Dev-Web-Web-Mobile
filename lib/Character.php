@@ -387,7 +387,7 @@ function render_character_articles(int $character_id){
 	foreach($obj_list as $obj){
 		?>
 		<div class="article_obj">
-			<div class="article_name"><h2><?php echo $obj["nom"] ?></h2></div>
+			<div class="article_name"><h2><?php echo htmlspecialchars($obj["nom"], ENT_QUOTES, 'UTF-8') ?></h2></div>
 			<div class="article_image_box"><img class="article_image" src="/assets/frontend/SVG/Icones/box_grey.svg" alt="Box" width="55"></div>
 		</div>
 		<?php

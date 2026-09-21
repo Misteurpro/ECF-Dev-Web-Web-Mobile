@@ -49,8 +49,9 @@
 		let shape_eyes = inputEyesSelect.options[inputEyesSelect.selectedIndex].text
 		let shape_nose = inputNoseSelect.options[inputNoseSelect.selectedIndex].text
 		let shape_mouth = inputMouthSelect.options[inputMouthSelect.selectedIndex].text
+		let csrf_token = get_csrf_token();
 
-		create_character(character_name.value, character_gender.value, color_skin, color_eyes, shape_eyes, color_hair, shape_nose, shape_mouth, is_edit);
+		create_character(character_name.value, character_gender.value, color_skin, color_eyes, shape_eyes, color_hair, shape_nose, shape_mouth, csrf_token, is_edit);
 	})
 	
 	const bodyColors = [
@@ -209,7 +210,7 @@
 		draw();
 	}
 
-	function create_character(name, gender, skin_color, eyes_color, eyes_shape, hair_color, nose_shape, mouth_shape, is_edit){
+	function create_character(name, gender, skin_color, eyes_color, eyes_shape, hair_color, nose_shape, mouth_shape, csrf_token, is_edit){
 
 		let params = new URLSearchParams(document.location.search)
 		if(is_edit){
@@ -225,6 +226,7 @@
 			formData.append("mouth_shape", mouth_shape);
 			formData.append("is_edit", is_edit);
 			formData.append("blob", blob);
+			formData.append("csrf_token", csrf_token);
 
 			async function sendForm(formData) {
 
@@ -258,6 +260,7 @@
 				formData.append("mouth_shape", mouth_shape);
 				formData.append("is_edit", is_edit);
 				formData.append("blob", blob);
+				formData.append("csrf_token", csrf_token);
 	
 				async function sendForm(formData) {
 					const response = await fetch("/menu/createur-de-personnage", {
@@ -269,6 +272,7 @@
 						window.location = "/personnage-creer-avec-succes"
 					}
 					else{
+						console.log(responseText);
 						window.location = "/personnage-creer-erreur"
 					}
 				}
@@ -331,7 +335,7 @@
 			let url = "/menu/createur-de-personnage"
 			xhttp.open("POST", url, true);
 			xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhttp.send("name="+name);
+			xhttp.send("name="+encodeURIComponent(name));
 		})
 	}
 

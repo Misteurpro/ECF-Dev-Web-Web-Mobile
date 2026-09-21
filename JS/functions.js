@@ -26,6 +26,11 @@ function show_comment_bar(islogin){
 	}
 }
 
+function get_csrf_token(){
+	const csrf_token = document.getElementById('csrf-token').value;
+	return csrf_token;
+}
+
 function deleteCharacter(){
 	var xhttp = new XMLHttpRequest();
 
@@ -187,10 +192,12 @@ function asign_articles(articles){
 
 	if(articles.length < 1){
 		body.append("articles[]", "none")
+		body.append("csrf_token", get_csrf_token())
 	}
 	else{
 		articles.forEach(article => {
 			body.append("articles[]", article);
+			body.append("csrf_token", get_csrf_token())
 		});
 	}
 

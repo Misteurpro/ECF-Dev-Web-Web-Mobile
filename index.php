@@ -6,7 +6,9 @@
 	require_once('lib/database.php');
 	require_once('lib/Character.php');
 	require_once("credentials.php");
-	debug_off();
+	
+	get_csrf_token();
+	debug_on();
 
 	$raw_link = $_SERVER['REQUEST_URI'];
 	$link = explode('?', $raw_link)[0];
@@ -16,6 +18,9 @@
 		case '/':
 			define('PAGE_IS_HOME', true);
 			$page_dir .= 'home.php';
+			break;
+		case '/send':
+			$page_dir .= 'send.php';
 			break;
 		case '/menu':
 			$welcome_message = true;
