@@ -30,9 +30,8 @@ if(!check_if_user_blocked($_SESSION["id_utilisateur"])):
     }
 
     if(isset($_REQUEST["name"]) && isset($_REQUEST["gender"]) && isset($_REQUEST["skin_color"]) && isset($_REQUEST["eyes_color"])
-        && isset($_REQUEST["eyes_shape"]) && isset($_REQUEST["hair_color"]) && isset($_REQUEST["nose_shape"]) && isset($_REQUEST["mouth_shape"]) && isset($_FILES["blob"]))
+        && isset($_REQUEST["eyes_shape"]) && isset($_REQUEST["hair_color"]) && isset($_REQUEST["nose_shape"]) && isset($_REQUEST["mouth_shape"]) && isset($_FILES["blob"]) && check_csrf_token())
     {
-        
         if(is_connected())
             {
             $name = $_REQUEST["name"];
@@ -48,7 +47,7 @@ if(!check_if_user_blocked($_SESSION["id_utilisateur"])):
             $blob = file_get_contents($_FILES["blob"]["tmp_name"]);
             
             $name_result = check_character_name($name);
-            if(isset($_REQUEST["is_edit"]) && $_REQUEST["is_edit"] == "true"){
+            if(isset($_REQUEST["is_edit"]) && $_REQUEST["is_edit"] == "true" && check_character_ownership($_GET["character"])){
                 $user_id = $_SESSION['id_utilisateur'];
                 $insert_character = $dbh->prepare("UPDATE `personnage` SET `genre` = ?, `couleur_peau` = ?, `couleur_yeux` = ?, `couleur_cheveux` = ?, `forme_yeux` = ?, `forme_nez` = ?, `forme_bouche` = ?, `autorise` = '0', `image` = ? WHERE `personnage`.`id_personnage` = ?");  
                 $insert_character->bindParam(1, $genre);
@@ -121,10 +120,10 @@ if(!check_if_user_blocked($_SESSION["id_utilisateur"])):
 ?>
 <html lang="fr">
 <head>
+    <script defer src="\JS\characterCreator.js"></script>
     <?php require_once('layout/header/head-data.html'); ?>
     <link rel="stylesheet" href="/CSS/Charactercreator.style.css">
     <title>Créateur de personnage<?php echo TITLE_PAGE ?></title>
-    <script defer src="\JS\characterCreator.js"></script>
 </head>
 <body>
     <div class="topPart">
@@ -282,17 +281,18 @@ if(!check_if_user_blocked($_SESSION["id_utilisateur"])):
                                 </div>
 
                                 <div class="tab">
-                                        <H1>Créateur de personnages</H1>
-                                        <label for="name_id">Nom :</label>
-                                        <input type="text" class="user_input" name="name" id="name_id" <?php echo $edit && $is_edit? "disabled":"" ?> oninput="check_name(this.value)" value="<?php echo $edit && $is_edit? get_character_name($_GET["character"]):"" ?>">
-                                        <p id="char_max_lengh"></p>
-                                        <label for="gender">Genre :</label>
-                                        <select name="gender" class="user_input" id="gender-select">
-                                            <option value="male">Homme</option>
-                                            <option value="female" <?php echo $current_gender == "female"? "selected" : "" ?>>Femme</option>
-                                        </select>
-                                        
-                                        <button id="submit_button" class="user_input" ><?php echo $edit && $is_edit? "Choisir les articles" : "Créer"?></button>
+                                    <?php embed_csrf_token() ?>
+                                    <H1>Créateur de personnages</H1>
+                                    <label for="name_id">Nom :</label>
+                                    <input type="text" class="user_input" name="name" id="name_id" <?php echo $edit && $is_edit? "disabled":"" ?> oninput="check_name(this.value)" value="<?php echo $edit && $is_edit? get_character_name($_GET["character"]):"" ?>">
+                                    <p id="char_max_lengh"></p>
+                                    <label for="gender">Genre :</label>
+                                    <select name="gender" class="user_input" id="gender-select">
+                                        <option value="male">Homme</option>
+                                        <option value="female" <?php echo $current_gender == "female"? "selected" : "" ?>>Femme</option>
+                                    </select>
+                                    
+                                    <button id="submit_button" class="user_input" ><?php echo $edit && $is_edit? "Choisir les articles" : "Créer"?></button>
                                 </div>
                                 <div id="temp"></div>
                             </div>

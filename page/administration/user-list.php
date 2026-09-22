@@ -13,7 +13,7 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 	}
 
 	if(isset($_GET["user"])){
-		if(isset($_GET['delete']) && isset($_POST['confirm'])){
+		if(isset($_GET['delete']) && isset($_POST['confirm']) && check_csrf_token()){
 			$del_return = delete_user($_REQUEST['user']);
 			if($del_return == "success"){
 				echo"/suppression-utilisateur-succes";
@@ -23,7 +23,7 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 			}
 			exit;
 		}
-		else if(isset($_GET['suspend']) && isset($_POST['confirm'])){
+		else if(isset($_GET['suspend']) && isset($_POST['confirm']) && check_csrf_token()){
 			$del_return = suspend_user($_REQUEST['user']);
 			if($del_return == "success"){
 				echo"/suspension-succes";
@@ -34,7 +34,7 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 
 			exit;
 		}
-		else if(isset($_GET['unsuspend']) && isset($_POST['confirm'])){
+		else if(isset($_GET['unsuspend']) && isset($_POST['confirm']) && check_csrf_token()){
 			$del_return = suspend_user($_REQUEST['user'], true);
 			if($del_return == "success"){
 				echo"/suspension-succes?uns";
@@ -54,7 +54,7 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 	<title>Admin<?php echo TITLE_PAGE ?></title>
 </head>
 <body>
-	<?php require_once('layout/header/header.php'); ?>
+	<?php require_once('layout/header/header.php');?>
 	
 	<main>
 		<div class="row">	
@@ -81,19 +81,8 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 					<div class="char-appr-div user-list">
 
 					<?php 
+						embed_csrf_token();
 						get_user_list($current_page, $amount);
-					
-
-						if(isset($_GET['delete'])){
-							?>										
-							<div class='delete_character'>
-								<p>Souhaitez-vous vraiment supprimer <?php echo get_username_by_id($_GET["user"])?> ? Ceci est une action permanente!</p>
-								<span class='buttons-div-confirmation'>
-									<button class='delete' id='delete_character' onclick='deleteUser(<?php echo is_admin() ? "true" : "false" ?>)'; value=''>Supprimer</button> <button onclick="location.href = '/<?php echo $status ?>/liste-utilisateur?<?php if(isset($_GET['p'])){echo 'p='.$_GET['p'];} ?>'";>Annuler</button>
-								</span>
-							</div>		
-							<?php
-						}
 						?>
 
 					</div>
@@ -101,6 +90,18 @@ if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_emplo
 				</div>
 			</div>
 		</div>
+			<?php 
+			if(isset($_GET['delete'])){
+			?>										
+			<div class='delete_character'>
+				<p>Souhaitez-vous vraiment supprimer <?php echo get_username_by_id($_GET["user"])?> ? Ceci est une action permanente!</p>
+				<span class='buttons-div-confirmation'>
+					<button class='delete' id='delete_character' onclick='deleteUser(<?php echo is_admin() ? "true" : "false" ?>)'; value=''>Supprimer</button> <button onclick="location.href = '/<?php echo $status ?>/liste-utilisateur?<?php if(isset($_GET['p'])){echo 'p='.$_GET['p'];} ?>'";>Annuler</button>
+				</span>
+			</div>		
+			<?php
+			}
+			?>
 	</main>
 
 	<?php require_once('layout/footer/footer.php'); ?>

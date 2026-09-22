@@ -11,7 +11,7 @@
 	if(isset($_REQUEST['character']))
 	{
 		//Delete character
-		if(isset($_GET['delete']) && isset($_POST['confirm'])){
+		if(isset($_GET['delete']) && check_csrf_token() && isset($_POST['confirm'])){
 			$del_return = delete_character($_REQUEST['character']);
 			if($del_return == "success"){
 				echo"/suppression-succes";
@@ -21,7 +21,7 @@
 			}
 			exit;
 		}
-		else if(isset($_GET['suspend']) && isset($_POST['confirm'])){
+		else if(isset($_GET['suspend']) && check_csrf_token() && isset($_POST['confirm'])){
 			$del_return = suspend_character($_REQUEST['character']);
 			if($del_return == "success"){
 				echo"/suspension-character-succes";
@@ -32,7 +32,7 @@
 
 			exit;
 		}
-		else if(isset($_GET['unsuspend']) && isset($_POST['confirm'])){
+		else if(isset($_GET['unsuspend']) && check_csrf_token() && isset($_POST['confirm'])){
 			$del_return = suspend_character($_REQUEST['character'], true);
 			if($del_return == "success"){
 				echo"/suspension-character-succes?uns";
@@ -98,9 +98,10 @@
 							<?php 
 								//get_character_articles_for_page($_GET["character"]);
 
-							if(isset($_GET['delete'])){
+							if(isset($_GET['delete']) && check_csrf_token()){
 									?>										
 									<div class='delete_character'>
+										<?php embed_csrf_token() ?>
 										<p>Souhaitez-vous vraiment supprimer ce personnage ? Ceci est une action permanente!</p>
 										<span class='buttons-div-confirmation'>
 											<button class='delete' id='delete_character' onclick='deleteCharacter()'; value=''>Supprimer</button> <button onclick="location.href = '/menu/page-personnage?character=<?php echo $_GET['character'] ?>'";>Annuler</button>
@@ -108,9 +109,10 @@
 									</div>		
 									<?php
 							}
-							if(isset($_GET['suspend']) || isset($_GET["unsuspend"])){
+							if(isset($_GET['suspend']) && check_csrf_token() || isset($_GET["unsuspend"]) && check_csrf_token()){
 									?>										
 									<div class='delete_character'>
+										<?php embed_csrf_token() ?>
 										<p>Souhaitez-vous vraiment <?php echo isset($_GET["unsuspend"])? "réactiver" : "suspendre"; ?> ce personnage ?</p>
 										<span class='buttons-div-confirmation'>
 											<button class='delete' id='suspend_character' onclick='suspendCharacter(<?php echo isset($_GET["unsuspend"])? "true" : "false"; ?>)'; value=''><?php echo isset($_GET["unsuspend"])? "réactiver" : "suspendre"; ?></button> <button onclick="location.href = '/menu/page-personnage?character=<?php echo $_GET['character'] ?>'";>Annuler</button>

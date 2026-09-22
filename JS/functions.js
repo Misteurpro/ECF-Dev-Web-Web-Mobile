@@ -3,6 +3,7 @@ console.log("Ces cookies pourraient être utilisés pour accéder à votre compt
 
 function loadDoc(character_id) {
 	var xhttp = new XMLHttpRequest();
+	const csrf_token = get_csrf_token();
 	
 	xhttp.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200) {
@@ -11,7 +12,7 @@ function loadDoc(character_id) {
 	};
 	shared = document.getElementById("tag_"+character_id).checked;
 
-	let url = ("/menu/mon-espace?share_status="+shared+"&character_id="+character_id);
+	let url = ("/menu/mon-espace?share_status="+shared+"&character_id="+character_id+"&csrf_token="+csrf_token);
 	xhttp.open("POST", url, true);
 	xhttp.send();
 }
@@ -26,6 +27,11 @@ function show_comment_bar(islogin){
 	}
 }
 
+function get_csrf_token(){
+	const csrf_token = document.getElementById('csrf-token').value;
+	return csrf_token;
+}
+
 function deleteCharacter(){
 	var xhttp = new XMLHttpRequest();
 
@@ -34,11 +40,12 @@ function deleteCharacter(){
 		window.location = this.responseText;
 	}
 	};
+	const csrf_token = get_csrf_token();
 	const urls = window.location;
 	const params = new URLSearchParams(urls.search);
 	const character_id = params.get('character')
 
-	let url = ("/menu/page-personnage?character="+character_id+"&delete");
+	let url = ("/menu/page-personnage?character="+character_id+"&csrf_token="+csrf_token+"&delete");
 	xhttp.open("POST", url, true);
 	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhttp.send("confirm");
@@ -79,10 +86,11 @@ function deleteSelfAccount(){
 	}
 	};
 
+	const csrf_token = get_csrf_token();
 	let url = ("/menu/mon-espace/supprimer-le-compte");
 	xhttp.open("POST", url, true);
 	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhttp.send("confirm");
+	xhttp.send("confirm&csrf_token="+csrf_token);
 }
 
 function manageItem(item, deactivate = false, itself){
@@ -91,7 +99,6 @@ function manageItem(item, deactivate = false, itself){
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			let state = this.responseText;
-			console.log(itself)
 
 			if(itself.dataset.isactive == "active"){
 				itself.innerText = "Activer";
@@ -106,9 +113,10 @@ function manageItem(item, deactivate = false, itself){
 		}
 	};
 
-	let url = "/employee/liste-article?item="+item+"&enable"
+	const csrf_token = get_csrf_token();
+	let url = "/employee/liste-article?item="+item+"&csrf_token="+csrf_token+"&enable"
 	if(deactivate == true){
-		url = "/employee/liste-article?item="+item+"&disable";
+		url = "/employee/liste-article?item="+item+"&csrf_token="+csrf_token+"&disable";
 	}
 
 	xhttp.open("POST", url, true);
@@ -187,10 +195,12 @@ function asign_articles(articles){
 
 	if(articles.length < 1){
 		body.append("articles[]", "none")
+		body.append("csrf_token", get_csrf_token())
 	}
 	else{
 		articles.forEach(article => {
 			body.append("articles[]", article);
+			body.append("csrf_token", get_csrf_token())
 		});
 	}
 
@@ -210,13 +220,14 @@ function suspendCharacter(unsuspend = false){
 		
 	}
 	};
+	const csrf_token = get_csrf_token()
 	const urls = window.location;
 	const params = new URLSearchParams(urls.search);
 	const character_id = params.get('character')
 
-	let url = ("/menu/page-personnage?character="+character_id+"&suspend");
+	let url = ("/menu/page-personnage?character="+character_id+"&csrf_token="+csrf_token+"&suspend");
 	if(unsuspend == true){
-		url = "/menu/page-personnage?character="+character_id+"&unsuspend";
+		url = "/menu/page-personnage?character="+character_id+"&csrf_token="+csrf_token+"&unsuspend";
 	}
 
 	xhttp.open("POST", url, true);
@@ -234,6 +245,7 @@ function suspendUser(user_id, unsuspend = false, admin = false){
 		window.location = this.responseText;
 	}
 	};
+	const csrf_token = get_csrf_token()
 	const urls = window.location;
 	const params = new URLSearchParams(urls.search);
 
@@ -243,9 +255,9 @@ function suspendUser(user_id, unsuspend = false, admin = false){
 	else{
 		status = "employee"
 	}
-	let url = ("/"+status+"/liste-utilisateur?user="+user_id+"&suspend");
+	let url = ("/"+status+"/liste-utilisateur?user="+user_id+"&csrf_token="+csrf_token+"&suspend");
 	if(unsuspend == true){
-		url = "/"+status+"/liste-utilisateur?user="+user_id+"&unsuspend";
+		url = "/"+status+"/liste-utilisateur?user="+user_id+"&csrf_token="+csrf_token+"&unsuspend";
 	}
 	xhttp.open("POST", url, true);
 	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
