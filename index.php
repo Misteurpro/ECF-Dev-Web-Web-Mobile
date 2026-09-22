@@ -19,9 +19,6 @@
 			define('PAGE_IS_HOME', true);
 			$page_dir .= 'home.php';
 			break;
-		case '/send':
-			$page_dir .= 'send.php';
-			break;
 		case '/menu':
 			$welcome_message = true;
 			$page_dir .= 'menu.php';
