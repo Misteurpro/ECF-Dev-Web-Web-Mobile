@@ -86,10 +86,11 @@ function deleteSelfAccount(){
 	}
 	};
 
+	const csrf_token = get_csrf_token();
 	let url = ("/menu/mon-espace/supprimer-le-compte");
 	xhttp.open("POST", url, true);
 	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhttp.send("confirm");
+	xhttp.send("confirm&csrf_token="+csrf_token);
 }
 
 function manageItem(item, deactivate = false, itself){
@@ -244,6 +245,7 @@ function suspendUser(user_id, unsuspend = false, admin = false){
 		window.location = this.responseText;
 	}
 	};
+	const csrf_token = get_csrf_token()
 	const urls = window.location;
 	const params = new URLSearchParams(urls.search);
 
@@ -253,9 +255,9 @@ function suspendUser(user_id, unsuspend = false, admin = false){
 	else{
 		status = "employee"
 	}
-	let url = ("/"+status+"/liste-utilisateur?user="+user_id+"&suspend");
+	let url = ("/"+status+"/liste-utilisateur?user="+user_id+"&csrf_token="+csrf_token+"&suspend");
 	if(unsuspend == true){
-		url = "/"+status+"/liste-utilisateur?user="+user_id+"&unsuspend";
+		url = "/"+status+"/liste-utilisateur?user="+user_id+"&csrf_token="+csrf_token+"&unsuspend";
 	}
 	xhttp.open("POST", url, true);
 	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

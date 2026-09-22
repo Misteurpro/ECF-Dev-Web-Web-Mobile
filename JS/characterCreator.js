@@ -272,7 +272,6 @@
 						window.location = "/personnage-creer-avec-succes"
 					}
 					else{
-						console.log(responseText);
 						window.location = "/personnage-creer-erreur"
 					}
 				}
