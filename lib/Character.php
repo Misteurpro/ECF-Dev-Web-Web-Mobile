@@ -300,23 +300,23 @@ function get_character_page_button(){
 	if(check_character_ownership($_GET["character"])){
 		$character_id = htmlspecialchars($_GET["character"], ENT_QUOTES, "UTF-8");
 		?>
-			<a href='/menu/page-personnage?character=<?php echo $character_id ?>&delete' class='button color-red bs-5'>Supprimer</a>
+			<a href='/menu/page-personnage?character=<?php echo $character_id ?>&csrf_token=<?php echo get_csrf_token() ?>&delete' class='button color-red bs-5'>Supprimer</a>
 			<span class="margin-1"></span>
 			<a href='<?php if(check_if_character_blocked($_GET["character"]) == 1){echo "/menu/page-personnage/modifier?character=$character_id";} ?>' class='button <?php echo check_if_character_blocked($_GET["character"]) != 1? "inactive" : "" ?> color-secondary-darker bs-5'>Modifier</a>
 		<?php
 	}
 	elseif(is_admin() && !is_approved($_GET["character"]) && !check_if_character_blocked($_GET["character"]) && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_employee() &&!check_if_user_blocked($_SESSION["id_utilisateur"]) && !is_approved($_GET["character"]) && check_if_character_blocked($_GET["character"])){
 		?>
-			<a href='/employee/approuver-personnage?character=<?php echo $_GET["character"] ?>&refuse' class='button color-red bs-5'>Refuser</a>
+			<a href='/employee/approuver-personnage?character=<?php echo $_GET["character"] ?>&csrf_token=<?php echo get_csrf_token() ?>&refuse' class='button color-red bs-5'>Refuser</a>
 			<span class="margin-1"></span>
-			<a href='/employee/approuver-personnage?character=<?php echo $_GET["character"] ?>&approve' class='button color-secondary-darker bs-5'>Approuver</a>
+			<a href='/employee/approuver-personnage?character=<?php echo $_GET["character"] ?>&csrf_token=<?php echo get_csrf_token() ?>&approve' class='button color-secondary-darker bs-5'>Approuver</a>
 		<?php
 	}elseif(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_employee() && !check_if_user_blocked($_SESSION["id_utilisateur"])){
 		?>
-			<a href='/employee/approuver-personnage?character=<?php echo $_GET["character"] ?>&delete' class='button color-red bs-5'>Supprimer</a>
+			<a href='/employee/approuver-personnage?character=<?php echo $_GET["character"] ?>&csrf_token=<?php echo get_csrf_token() ?>&delete' class='button color-red bs-5'>Supprimer</a>
 			<span class="margin-1"></span>
-			<?php if(check_if_character_blocked($_GET["character"]) !== 2 ){ ?><a href='/menu/page-personnage?character=<?php echo $_GET["character"] ?>&suspend' class='button color-secondary-darker'>Suspendre</a><?php }else{ ?>
-							<a href='/menu/page-personnage?character=<?php echo $_GET["character"] ?>&unsuspend' class='button color-secondary-darker'>Reactivation</a>
+			<?php if(check_if_character_blocked($_GET["character"]) !== 2 ){ ?><a href='/menu/page-personnage?character=<?php echo $_GET["character"] ?>&csrf_token=<?php echo get_csrf_token() ?>&suspend' class='button color-secondary-darker'>Suspendre</a><?php }else{ ?>
+							<a href='/menu/page-personnage?character=<?php echo $_GET["character"] ?>&csrf_token=<?php echo get_csrf_token() ?>&unsuspend' class='button color-secondary-darker'>Reactivation</a>
 							<?php } ?>
 		<?php
 	}
@@ -485,7 +485,7 @@ function render_characters(mixed $characters, mixed $enable_overlay, bool $is_ad
 						<span class='overlay'>
 						<span>
 							<a href='/menu/page-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>' class='button'>Modifier</a>
-							<a href='/menu/page-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>&delete' class='button color-red'>Supprimer</a>
+							<a href='/menu/page-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>&csrf_token=<?php echo get_csrf_token() ?>&delete' class='button color-red'>Supprimer</a>
 						</span>
 						<span>
 							<a href='/menu/page-personnage?character=<?php echo htmlspecialchars($character["id_personnage"], ENT_QUOTES, 'UTF-8') ?>' class='button color-green'>Ouvrir</a>
