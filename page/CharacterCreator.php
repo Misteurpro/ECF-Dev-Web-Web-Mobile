@@ -294,7 +294,6 @@ if(!check_if_user_blocked($_SESSION["id_utilisateur"])):
                                     
                                     <button id="submit_button" class="user_input" ><?php echo $edit && $is_edit? "Choisir les articles" : "Créer"?></button>
                                 </div>
-                                <div id="temp"></div>
                             </div>
                         </div>
                     </div>

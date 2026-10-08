@@ -83,6 +83,7 @@ aside{
 #main_screen{
   position: relative;
   justify-content: flex-start;
+  clip-path:none;
 }
 
 .character_sheet{
@@ -139,35 +140,52 @@ button.user_input:active{
 }
 
 @media(max-width: 1100px) {
-  
   div.tab{
   display: flex;
   align-items: center;
   flex-direction: column;
-}
+  }
 
-aside{
-  border-top: 0px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-}
+  aside{
+    border-top: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
 
-.character_sheet{
-  position: absolute;
-  bottom: -340px;
-  right: 20px;
-}
+  .character_sheet{
+    position: absolute;
+    bottom: -340px;
+    right: 20px;
+  }
 
-.character_creator_asset{
-  flex-direction: column-reverse;
-}
+  .character_creator_asset{
+    flex-direction: column-reverse;
+  }
 
-#main_screen{
-  margin: 0px;
-  border-bottom: 0px;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
-  justify-content: center;
-}
+  #main_screen{
+    margin: 0px;
+    border-bottom: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    justify-content: center;
+  }
 
+}
+@media(max-width: 600px) {
+
+  #main_screen{
+    display: flex;
+    flex-direction: column-reverse;
+    align-content: center;
+    align-items: center;
+  }
+
+  .character_sheet{
+    position: relative;
+    bottom: 0px;
+    right: 0px;
+  }
+  aside{
+    width: auto;
+  }
 }
