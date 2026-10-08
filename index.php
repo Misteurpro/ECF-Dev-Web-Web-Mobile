@@ -1,14 +1,15 @@
 <?php
-	session_start();
 	require_once('extension/vendor/autoload.php');
 	require_once("lib/function.php");
+	set_server_release_status("localdev"); // PLEASE REMEMBER TO CHANGE STATUS BEFORE RELEASE! THANK YOU!
+	session_start();
 	require_once("lib/var.php");
 	require_once('lib/database.php');
 	require_once('lib/Character.php');
 	require_once("credentials.php");
 	
 	get_csrf_token();
-	debug_on();
+	
 
 	$raw_link = $_SERVER['REQUEST_URI'];
 	$link = explode('?', $raw_link)[0];

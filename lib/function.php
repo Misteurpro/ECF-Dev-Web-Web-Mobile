@@ -20,6 +20,29 @@ function is_connected(){
 	return false;
 }
 
+/**
+ * This will setup the server based on the status given please put it before starting a session for it to work properly, carefull as unproper status could reveal unwanted data to user!
+ * @param string $status Should be either 'release' for release or 'localdev' for something still in developpement, warning $status is case sensitive and should all be in lowercase.
+ * @return bool after setting everything up it will return true based on if there was no error.
+ * @throws string not setting a valid value could throw an Exception and would cause the app to stop working!
+ */
+function set_server_release_status($status):bool{
+
+	if($status === 'release'){
+		debug_off();
+		session_set_cookie_params(0, "/", null, true, true);
+		return true;
+	}
+	else if($status === 'localdev'){
+		debug_on();
+		session_set_cookie_params(0, "/", null, false, true);
+		return true;
+	}
+	else{
+		throw new Exception('Please select a valid server status as it is not set for release or localdev'); 
+	}
+}
+
 function get_csrf_token(){
 	if(empty($_SESSION['csrf_token'])){
 		$_SESSION['csrf_token'] = bin2hex(random_bytes(64));
