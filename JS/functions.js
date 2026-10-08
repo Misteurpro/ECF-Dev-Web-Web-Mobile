@@ -264,15 +264,6 @@ function suspendUser(user_id, unsuspend = false, admin = false){
 	xhttp.send("confirm");
 }
 
-function getCookie(name) {
-	const value = `; ${document.cookie}`
-	const parts = value.split(`; ${name}=`)
-	if (parts.length === 2) {
-		return parts.pop().split(';').shift()
-	}
-	return null
-}
-
 function searchCharacter(){
 	const search_param = document.getElementById("main_searchbar").value;
 	const gender_param = document.getElementById("gender_select").value;
