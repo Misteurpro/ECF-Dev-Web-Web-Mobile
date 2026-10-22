@@ -1,4 +1,6 @@
 credentials.php
 credentials-backup.txt
+errors.log
+.well-known
 
 /.vs/
