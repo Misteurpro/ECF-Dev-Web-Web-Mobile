@@ -6,7 +6,7 @@ require_once("lib/page-library.php");
 
 if(is_admin() && !check_if_user_blocked($_SESSION["id_utilisateur"]) || is_employee() && !check_if_user_blocked($_SESSION["id_utilisateur"])):
 
-	if(!empty($_GET['commentaire'])){
+	if(!empty($_GET['commentaire']) && check_csrf_token()){
 		$comment_id = $_GET['commentaire'];
 		if(is_connected() && isset($_GET['approve'])){
 			approve_comment($comment_id);

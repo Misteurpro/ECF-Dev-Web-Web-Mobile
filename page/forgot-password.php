@@ -4,7 +4,7 @@ if(!is_connected())
 	$valide_token = false;
 	$email = '';
 	$username = '';
-	if(isset($_POST["email"])&&!isset($_POST["token"]))
+	if(isset($_POST["email"])&&!isset($_POST["token"]) && check_csrf_token())
 	{
 		if(get_username(true, $_POST['email']) === $_POST["username"]){
 			$error_forgot = forgot_password($_POST["email"], $_POST["username"]);
@@ -55,6 +55,7 @@ if(!is_connected())
 
 		<main>
 			<form action='/forgot-password' method='POST'>
+				<?php embed_csrf_token() ?>
 				<label for='email'>Email</label>
 				<input type='email' name='email' id='email'<?php echo $email ?> required>
 				<label for='username'>Nom d'utilisateur</label>

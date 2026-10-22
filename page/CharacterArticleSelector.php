@@ -4,20 +4,26 @@ error_reporting(E_ALL ^ E_WARNING);
 if(!check_if_user_blocked($_SESSION["id_utilisateur"])):
     if(check_character_ownership($_GET['character'])){
 
-        if(isset($_GET["character"]) && isset($_POST['articles'])){
+        if(isset($_GET["character"]) && isset($_POST['articles']) && check_csrf_token()){
             echo add_articles_to_character($_POST['articles'], $_GET["character"]);
             exit;
-        };
+        }
+        else if(isset($_GET["character"]) && !isset($_POST['articles'])){
+            //Do nothing!
+        }
+        else{
+            header("Location: /personnage-creer-erreur");
+        }
         ?>
             <script>
                 let active_article = [];
             </script>
             <html lang="fr">
                 <head>
+                    <script defer src="\JS\CharacterCreator.js"></script>
                     <?php require_once('layout/header/head-data.html'); ?>
                     <link rel="stylesheet" href="/CSS/charactercreator.style.css">
                     <title>Selection d'articles<?php echo TITLE_PAGE ?></title>
-                    <script defer src="\JS\CharacterCreator.js"></script>
                 </head>
                 <body>
                     <div class="topPart">
@@ -26,6 +32,7 @@ if(!check_if_user_blocked($_SESSION["id_utilisateur"])):
                                 <?php require_once('layout/header/header.php'); ?>
                                 
                                 <main>
+                                    <?php embed_csrf_token() ?>
                                     <H1>Sélectionnez vos objets que le personnage portera</H1>
                                     <?php                                         
                                         $personnage = get_characters(false, '', 0,0, $_GET['character']); 

@@ -3,7 +3,7 @@ if(is_admin()):
 	define("EMPLOYEE_CREATOR", "");
 	$email = '';
 	$username = '';
-	if(isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]))
+	if(isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]) && check_csrf_token())
 	{
 		$error_signin = signin_employee($_POST["username"], $_POST["email"], $_POST["password"]);
 
@@ -30,6 +30,7 @@ if(is_admin()):
 					</div>
 					<?php if(!isset($_GET['success'])):?>
 					<form action='/admin/creer-compte-employee' method='POST'>
+						<?php embed_csrf_token() ?>
 						<label for='username'>Nom d'utilisateur</label>
 						<input type='username' name='username' id='username'<?php echo $username ?>>
 

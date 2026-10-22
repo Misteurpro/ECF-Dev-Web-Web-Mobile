@@ -3,7 +3,7 @@ if(!is_connected())
 {
 	$email = '';
 	$username = '';
-	if(isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]))
+	if(isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]) && check_csrf_token())
 	{
 		$error_signin = signin($_POST["username"], $_POST["email"], $_POST["password"]);
 
@@ -22,6 +22,9 @@ if(!is_connected())
 
 		<main>
 			<form action='/signin' method='POST'>
+
+				<input type="hidden" name="csrf_token" value="<?php echo(htmlspecialchars(get_csrf_token(), ENT_QUOTES, 'UTF-8')) ?>">
+
 				<label for='username'>Nom d'utilisateur</label>
 				<input type='username' name='username' id='username'<?php echo $username ?> required>
 
@@ -52,5 +55,4 @@ if(!is_connected())
 else 
 {
 	header("Location: /menu");
-
 }

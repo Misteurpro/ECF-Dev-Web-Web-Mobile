@@ -21,6 +21,50 @@ function is_connected(){
 }
 
 /**
+ * This will setup the server based on the status given please put it before starting a session for it to work properly, carefull as unproper status could reveal unwanted data to user!
+ * @param string $status Should be either 'release' for release or 'localdev' for something still in developpement, warning $status is case sensitive and should all be in lowercase.
+ * @return bool after setting everything up it will return true based on if there was no error.
+ * @throws string not setting a valid value could throw an Exception and would cause the app to stop working!
+ */
+function set_server_release_status($status):bool{
+
+	if($status === 'release'){
+		debug_off();
+		session_set_cookie_params(0, "/", null, true, true);
+		return true;
+	}
+	else if($status === 'localdev'){
+		debug_on();
+		session_set_cookie_params(0, "/", null, false, true);
+		return true;
+	}
+	else{
+		throw new Exception('Please select a valid server status as it is not set for release or localdev'); 
+	}
+}
+
+function get_csrf_token(){
+	if(empty($_SESSION['csrf_token'])){
+		$_SESSION['csrf_token'] = bin2hex(random_bytes(64));
+	}
+
+	return $_SESSION['csrf_token'];
+}
+
+function embed_csrf_token(){
+	echo ("<input id='csrf-token' name='csrf_token' type='hidden' value='".htmlspecialchars(get_csrf_token(), ENT_QUOTES, 'UTF-8')."'>");
+}
+
+function check_csrf_token(){
+	if(empty($_REQUEST["csrf_token"]) || empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_REQUEST["csrf_token"])){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+/**
  * This will return true or false if you are an employee or not
  * @return bool
  */
@@ -62,6 +106,8 @@ function debug_on() : void {
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
+	ini_set('log_error', 1);
+	ini_set('error_log', 'errors.log');
 }
 /**
  * This will disable debugging on the website
@@ -70,7 +116,9 @@ function debug_on() : void {
 function debug_off() : void {
 	ini_set('display_errors', 0);
 	ini_set('display_startup_errors', 0);
-	error_reporting(0);
+	error_reporting(E_ALL);
+	ini_set('log_error', 1);
+	ini_set('error_log', 'errors.log');
 }
 
 function check_password_strong($password){
@@ -715,8 +763,8 @@ function get_comments_to_approve(int $page, int $limit) : mixed{
 						<div class="date-approval">
 							<p class="comment-date"><img width="20" height="20" src="/assets/frontend/SVG/Icones/calendar-lines-pen.svg" alt=""><?php echo $comment['date_commentaire'] ?></p>
 							<div class="buttons-div">
-								<a href='/<?php echo $url ?>/approuver-commentaire?commentaire=<?php echo $comment["id_commentaire"] ?>&approve' class='button color-secondary-darker'>Approuver</a>
-								<a href='/<?php echo $url ?>/approuver-commentaire?commentaire=<?php echo $comment["id_commentaire"] ?>&refuse' class='button color-red'>Refuser</a>
+								<a href='/<?php echo $url ?>/approuver-commentaire?commentaire=<?php echo $comment["id_commentaire"] ?>&csrf_token=<?php echo get_csrf_token() ?>&approve' class='button color-secondary-darker'>Approuver</a>
+								<a href='/<?php echo $url ?>/approuver-commentaire?commentaire=<?php echo $comment["id_commentaire"] ?>&csrf_token=<?php echo get_csrf_token() ?>&refuse' class='button color-red'>Refuser</a>
 							</div>
 						</div>
 					</div>

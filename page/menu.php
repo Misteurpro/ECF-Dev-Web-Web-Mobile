@@ -29,7 +29,7 @@
 	if(isset($_REQUEST["share_status"]))
 	{
 		//Change Character data
-		if(is_connected())
+		if(is_connected() && check_csrf_token())
 		{
 			$character_id = $_REQUEST["character_id"];
 
@@ -56,7 +56,7 @@
 	}
 
 	//This is supposed to manage the Contact us part, if anyone want to send a message it will automatically fill it up if you are not connected
-	if(isset($_POST["email"]) && isset($_POST["username"])){
+	if(isset($_POST["email"]) && isset($_POST["username"]) && check_csrf_token()){
 		$email = $_POST["email"];
 		$username = $_POST["username"];
 		$message = $_POST["message"];
@@ -71,9 +71,7 @@
 		}
 		else{
 			$username_error = "Le nom d'utilisateur est inconnu, veuillez utiliser un nom d'utilisateur existant";
-		}
-
-
+		}	
 	}
 	
 	$email = "";
@@ -139,6 +137,7 @@
 					if(!empty($private_list_character)){
 					?>
 						<div class='user-bar'>
+							<?php embed_csrf_token() ?>
 							<h1 class='user_my_space vw-150'>Mon espace</h1>
 							<div class="ms-b-div">
 								<button class="color-secondary-darker vw-075" onclick="location.href='/menu/createur-de-personnage'";><h2>Créer un personnage</h2></button>
@@ -198,6 +197,7 @@
 						if(isset($contact)){
 						?>
 							<form action="/menu/contactez-nous" method="POST">
+								<?php embed_csrf_token() ?>
 								<label for="email">Email :</label>
 								<input type="email" name="email" id="email" value="<?php echo($email) ?>">
 								<label for="username">Pseudo :</label>
