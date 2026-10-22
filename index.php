@@ -33,7 +33,7 @@
 			$delete_account;
 			$page_dir .= '/error/delete-account-confirmation.php';
 			break;
-		case '/menu/contactez-nous';
+		case '/menu/contactez-nous':
 			$contact = 1;
 			$page_dir .= 'menu.php';
 			break;
