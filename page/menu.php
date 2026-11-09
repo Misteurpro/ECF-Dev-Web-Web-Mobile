@@ -55,7 +55,7 @@
 		exit();
 	}
 
-	//This is supposed to manage the Contact us part, if anyone want to send a message it will automatically fill it up if you are not connected
+	//This is supposed to manage the Contact us part, if anyone want to send a message it will automatically fill it up if you are connected
 	if(isset($_POST["email"]) && isset($_POST["username"]) && check_csrf_token()){
 		$email = $_POST["email"];
 		$username = $_POST["username"];
