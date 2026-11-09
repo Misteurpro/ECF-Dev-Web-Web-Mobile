@@ -5,7 +5,7 @@
 	<title>Erreur 404<?php echo TITLE_PAGE ?></title>
 </head>
 <body>
-	<?php require_once('layout/header/header.php'); ?>
+	<?php require_once('layout/header/header.php'); http_response_code(404);?>
     <div class="margin-12">
 		<H1>Erreur 404 : Page non trouvée</H1>
 		<p>Revenir sur la page d'accueil, <a href="/">cliquez-ici</a></p>
